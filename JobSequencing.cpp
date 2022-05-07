@@ -51,3 +51,45 @@ int main()
 	printJobScheduling(arr, n);
 	return 0;
 }
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Customer{
+    int s,f,comp;
+};
+bool cmp(Customer a,Customer b){
+    if(a.comp == b.comp) return a.f < b.f;
+    return a.comp < b.comp;
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        Customer arr[n];
+        for(int i=0;i<n;i++)
+        {
+            cin>>arr[i].s;
+            cin>>arr[i].f;
+            cin>>arr[i].comp;
+        }
+        sort(arr,arr+n,cmp);
+        int count = (n>0) ? 1:0;
+        int i=0;
+        for(int j=1;j<n;j++){
+            if(arr[j].comp!=arr[i].comp)
+            {
+                count++;
+                i=j;
+            }
+            else if(arr[j].s>=arr[i].f)
+            {
+                count++;
+                i=j;
+            }
+        }
+        cout<<count<<endl;
+    }
+return 0;
+}
